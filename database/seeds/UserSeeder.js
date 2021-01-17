@@ -15,16 +15,30 @@ const Factory = use("Factory");
 
 class UserSeeder {
   async run() {
-    await Factory.model("App/Models/User").createMany(2, usersArray);
+    await Factory.model("App/Models/User").createMany(6, usersArray);
     //console.log(users);
   }
 }
 
 const usersArray = {
-  name: ["Gift Banda", "Admin"],
-  email: ["giftmbanda@gmail.com", "admin@myaudit.com"],
-  password: ["gift", "admin"],
-  is_active: [true, true],
-  role: ["admin", "admin"],
+  name: [
+    "Gift Banda",
+    "Tiger Nixon",
+    "Garrett Winters",
+    "Ashton Cox",
+    "Cedric Kelly",
+    "Rhona Davidson",
+  ],
+  email: [
+    "giftmbanda@gmail.com",
+    "tiger@gmail.com",
+    "garrett@gmail.com",
+    "ashton@gmail.com",
+    "cedric@gmail.com",
+    "rhona@gmail.com",
+  ],
+  password: ["gift", "gift", "gift", "gift", "gift", "gift"],
+  is_active: [true, true, true, true, true, true],
+  role: ["admin", "user", "user", "user", "user", "admin"],
 };
 module.exports = UserSeeder;

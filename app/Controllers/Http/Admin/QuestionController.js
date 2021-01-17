@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const User = use("App/Models/Question");
 /**
  * Resourceful controller for interacting with questions
  */
@@ -18,6 +18,8 @@ class QuestionController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
+    //const questions = await Question.all();
+    //console.log( { questions: questions.toJSON() })
     return view.render("admin.questionTable");
   }
 

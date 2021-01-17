@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const User = use("App/Models/User");
 /**
  * Resourceful controller for interacting with UserController
  */
@@ -18,7 +18,9 @@ class UserController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    return view.render("admin.userTable");
+    const users = await User.all();
+    //console.log({ users: users.toJSON() });
+    return view.render("admin.userTable", { users: users.toJSON() });
   }
 
   /**

@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Tool = use("App/Models/Tool");
 /**
  * Resourceful controller for interacting with audittools
  */
@@ -18,7 +18,8 @@ class AuditToolController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    return view.render("admin.auditToolTable");
+    const tools = await Tool.all();
+    return view.render("admin.auditToolTable", { tools: tools.toJSON() });
   }
 
   /**

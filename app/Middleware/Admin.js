@@ -9,10 +9,12 @@ class Admin {
    * @param {Request} ctx.request
    * @param {Function} next
    */
+
   async handle({ request, auth, response }, next) {
+    const ROLE = { USER: "user", SUPERVISOR: "supervisor", ADMIN: "admin" };
     try {
-      if((await auth.user.role) === "admin"){
-        await next(); // call next to advance the request
+      if ((await auth.user.role) === ROLE.ADMIN) {
+        return await next(); // call next to advance the request
       }
     } catch (error) {
       return response.route("/"); //route to the login page

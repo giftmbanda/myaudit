@@ -61,7 +61,7 @@ class signinController {
       name: request.input("name"),
       email: request.input("email"),
       password: request.input("password"),
-      role: request.input('role'),
+      role: request.input("role"),
     });
 
     return response.redirect("/");

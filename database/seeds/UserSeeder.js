@@ -25,6 +25,6 @@ const usersArray = {
   email: ["giftmbanda@gmail.com", "admin@myaudit.com"],
   password: ["gift", "admin"],
   is_active: [true, true],
-  role: ["user", "admin"],
+  role: ["admin", "admin"],
 };
 module.exports = UserSeeder;

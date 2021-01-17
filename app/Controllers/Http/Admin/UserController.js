@@ -21,7 +21,7 @@ class UserController {
     return view.render("admin.userTable");
   }
 
-  /** 
+  /**
    * Render a form to be used for creating a new UserController.
    * GET UserController/create
    *
@@ -53,9 +53,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show({ params, request, response, view }) {
-
-  }
+  async show({ params, request, response, view }) {}
 
   /**
    * Render a form to update an existing UserController.

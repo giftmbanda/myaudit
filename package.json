@@ -1,11 +1,11 @@
 {
-  "name": "adonis-fullstack-app",
+  "name": "myaudit",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
   "description": "The fullstack application boilerplate for Adonisjs",
   "main": "index.js",
   "engines": {
-    "node": "8.5.0"
+    "node": "12.18.4"
   },
   "scripts": {
     "start": "node server.js",
@@ -16,7 +16,7 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
+  "author": "www.giftmbanda.com",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {

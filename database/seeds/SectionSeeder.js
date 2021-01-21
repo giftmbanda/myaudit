@@ -1,27 +1,37 @@
-"use strict";
+// "use strict";
 
-/*
-|--------------------------------------------------------------------------
-| SectionSeeder
-|--------------------------------------------------------------------------
-|
-| Make use of the Factory instance to seed database with dummy data or
-| make use of Lucid models directly.
-|
-*/
+// /*
+// |--------------------------------------------------------------------------
+// | SectionSeeder
+// |--------------------------------------------------------------------------
+// |
+// | Make use of the Factory instance to seed database with dummy data or
+// | make use of Lucid models directly.
+// |
+// */
 
-/** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use("Factory");
+// /** @type {import('@adonisjs/lucid/src/Factory')} */
+// const Factory = use("Factory");
+// const Tool = use("App/Models/Tool");
 
-class SectionSeeder {
-  async run() {
-    // await Factory.model("App/Models/Section").createMany(2, sectionsArray);
-  }
-}
+// class SectionSeeder {
+//   async run() {
+//     const tools = await Tool.all();
+//     const _tools = tools.toJSON()
 
-const sectionsArray = {
-  tool_id: [1, 2], // tool_id must already be existing in tool table!!
-  section_name: ["section one", "section two"],
-};
+//     const sectionArrays = [];
 
-module.exports = SectionSeeder;
+//     for (const i in _tools) {
+//       let tool = _tools[i];
+
+//       sectionArrays.push({
+//         tool_id: tool.id,
+//         section_name: `Section ${tool.id}`
+//       });
+//     }
+//     console.log(sectionArrays.length);
+//     //await Factory.model("App/Models/Section").createMany(sectionArrays.length, sectionArrays);
+//   }
+// }
+
+// module.exports = SectionSeeder;

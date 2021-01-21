@@ -6,6 +6,7 @@ hooks.after.providersBooted(() => {
   const View = use("View");
   const Env = use("Env");
   const Exception = use("Exception");
+  const Route = use('Route');
 
   View.global("appUrl", (path) => {
     const APP_URL = Env.get("APP_URL");

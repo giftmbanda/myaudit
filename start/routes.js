@@ -31,7 +31,10 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get("/users", "Admin/UserController.index"); //render users
-    Route.get("/register", "Admin/UserController.create"); //render register
+    Route.get("/user/create", "Admin/UserController.create"); //render register
+    Route.get("/user/edit/:id", "Admin/UserController.edit"); //render user edit
+    Route.patch("/user/update/:id", "Admin/UserController.update").as('update') //process user update
+    Route.get("/user/delete/:id", "Admin/UserController.destroy"); //process user deletion
     Route.post("/register", "Auth/SigninController.store").as("register"); //process register
     Route.get("/tools", "Admin/AuditToolController.index"); //render tools
     Route.get("/sections", "Admin/SectionController.index"); //render sections

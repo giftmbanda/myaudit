@@ -12,10 +12,24 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use("Factory");
+const Tool = use("App/Models/Tool");
 
 class ToolSeeder {
   async run() {
     await Factory.model("App/Models/Tool").createMany(5, toolsArray);
+    const tools = await Tool.all();
+    const _tools = tools.toJSON();
+    const sectionArrays = [];
+
+    for (const i in _tools) {
+      let tool = _tools[i];
+      sectionArrays.push({
+        tool_id: tool.id,
+        section_name: `Section ${tool.id}`
+      });
+    }
+    // console.log(_tools.map(tool => tool.id));
+    await Factory.model("App/Models/Section").createMany(sectionArrays.length, sectionArrays);
     //console.log(toolsArray);
   }
 }

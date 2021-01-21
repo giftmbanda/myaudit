@@ -19,7 +19,6 @@ class UserController {
    */
   async index({ request, response, view }) {
     const users = await User.all();
-    //console.log({ users: users.toJSON() });
     return view.render("admin.userTable", { users: users.toJSON() });
   }
 
@@ -33,7 +32,7 @@ class UserController {
    * @param {View} ctx.view
    */
   async create({ request, response, view }) {
-    return view.render("admin.registerForm");
+    return view.render("admin.registerUserForm");
   }
 
   /**
@@ -67,9 +66,9 @@ class UserController {
    * @param {View} ctx.view
    */
   async edit({ params, request, response, view }) {
-    //get users id via params and use it to query db
-    //get users profile and return the data to the form in the view
-    return view.render("admin.userTable");
+    const userId = params.id;
+    const user = await User.find(userId);
+    return view.render("admin.editUserForm", { user: user.toJSON() });
   }
 
   /**
@@ -81,9 +80,19 @@ class UserController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
-    //get the user id via params and user data via form input
-    //query the db for the user by the user id from params
-    // if found the update the user by the by the data received from form input
+    const userId = params.id;
+    const user = request.all();
+
+    const updateUser = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      is_active: user.is_active,
+      role: user.role,
+    };
+
+    await User.query().where("id", userId).update(updateUser);
+    return response.redirect("/users");
   }
 
   /**
@@ -94,7 +103,11 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, request, response }) {
+    const userId = params.id;
+    await User.query().where("id", userId).update({ is_active: false });
+    return response.redirect("/users");
+  }
 }
 
 module.exports = UserController;

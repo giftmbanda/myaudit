@@ -35,8 +35,8 @@ Factory.blueprint("App/Models/Tool", (faker, i, toolsArray) => {
 // Section blueprint
 Factory.blueprint("App/Models/Section", (faker, i, sectionsArray) => {
   return {
-    tool_id: sectionsArray.tool_id[i],
-    section_name: sectionsArray.section_name[i],
+    tool_id: sectionsArray[i].tool_id,
+    section_name: sectionsArray[i].section_name
   };
 });
 

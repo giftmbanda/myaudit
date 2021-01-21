@@ -1,12 +1,14 @@
-@layout('admin.table') 
+@layout('layout.app')
+
+@section('headScript') 
+  @include('include.tableHeadScript')
+@endsection
 
 @section('content')
-
 <div class="container-fluid">
     <div class="block-header">
         <h2>
-            JQUERY DATATABLES
-            <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small>
+          Showing Audit Tools' List       
         </h2>
     </div>
     <!-- Basic Examples -->
@@ -15,7 +17,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        BASIC EXAMPLE
+                        Audit Tools
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -84,5 +86,8 @@
     </div>
     <!-- #END# Basic Examples -->
 </div>
+@endsection
 
+@section('bodyScript') 
+  @include('include.tableBodyScript')
 @endsection

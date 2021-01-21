@@ -1,6 +1,5 @@
-
 # our first command is to pull a base image
-FROM node:6
+FROM node:8-alpine
 
 # command is about creating a new directory
 RUN mkdir -p /usr/src/app
@@ -9,7 +8,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # copying the ‘package.json’ file to working dir
-COPY package.json /usr/src/app
+COPY package*.json /usr/src/app
 
 # run the ‘npm cache clean’ command
 RUN npm cache clean
@@ -23,4 +22,4 @@ COPY . /usr/src/app
 # asks the container to expose port number 3333
 EXPOSE 3333
 
-CMD ["npm","start"]
+CMD [ "npm", "start" ]

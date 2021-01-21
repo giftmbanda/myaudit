@@ -1,19 +1,35 @@
-version: "3.3"
+version: "3.7"
 services:
-  database: # name of the first service
-    container_name: database
+  # api: # first service
+  #   container_name: api-container
+  #   restart: always
+  #   build: ./server
+  #   ports:
+  #     - "8081:8081" # port 8081 is already exposed in the Dockerfile
+  #   depends_on: 
+  #     - mysql
+  # client: # second service
+  #   container_name: client-container
+  #   restart: always
+  #   build: ./client
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on: 
+  #     - api
+  mysql: # third service
+    container_name: mysql-container
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'myauditdb' # database name
-      MYSQL_USER: 'root' # user type
-      MYSQL_PASSWORD: 'password' # Password
-      MYSQL_ROOT_PASSWORD: 'password' # Password for root access
-    ports: # <Port exposed> : < MySQL Port running inside container>  
-      - '3306:3306'
-    expose: # Opens port 3306 on the container
-      - '3306'
-    volumes: # Where our data will be persisted
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+    expose:
+      - "3306"
+    ports: 
+      - "3306:3306"
+    volumes:
       - my-db:/var/lib/mysql
-volumes: # Names our volume
+volumes:
   my-db:

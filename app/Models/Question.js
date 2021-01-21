@@ -4,9 +4,9 @@
 const Model = use("Model");
 
 class Question extends Model {
-    // modelCs() {
-    //     return this.hasMany('App/Models/ModelC')
-    // }
+  section() {
+    return this.belongsTo("App/Models/Section");
+  }
 }
 
 module.exports = Question;

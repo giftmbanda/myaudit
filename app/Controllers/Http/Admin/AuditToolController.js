@@ -19,7 +19,7 @@ class AuditToolController {
    */
   async index({ request, response, view }) {
     const tools = await Tool.all();
-    return view.render("admin.auditToolTable", { tools: tools.toJSON() });
+    return view.render("admin.toolTable", { tools: tools.toJSON() });
   }
 
   /**

@@ -5,7 +5,6 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const User = use("App/Models/User");
 const { validateAll } = use("Validator");
-const randomString = require("random-string");
 /**
  * Resourceful controller for interacting with signin
  */
@@ -44,24 +43,15 @@ class signinController {
    * @param {Response} ctx.response
    */
   async store({ request, session, response }) {
-    //validate form inputs
-    const validation = await validateAll(request.all(), {
-      name: "required",
-      email: "required|email|unique:users,email",
-      password: "required",
-    });
-
-    if (validation.fails()) {
-      session.withErrors(validation.messages()).flashExcept(["password"]);
-      return response.redirect("back");
-    }
+    //get all form inputs
+    const user = request.all();
 
     //create user
-    const user = await User.create({
-      name: request.input("name"),
-      email: request.input("email"),
-      password: request.input("password"),
-      role: request.input("role"),
+    await User.create({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      role: user.role,
     });
 
     return response.redirect("/");

@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const User = use("App/Models/Section");
+const Section = use("App/Models/Section");
 /**
  * Resourceful controller for interacting with sections
  */
@@ -18,9 +18,8 @@ class SectionController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    //const sections = await Section.all();
-    //console.log( { sections: sections.toJSON() })
-    return view.render("admin.sectionTable");
+    const sections = await Section.query().with("tool").fetch();
+    return view.render("admin.sectionTable", { sections: sections.toJSON() });
   }
 
   /**

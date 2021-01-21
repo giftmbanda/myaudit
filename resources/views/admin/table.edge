@@ -1,18 +1,87 @@
-<!DOCTYPE html>
-<html>
+@layout('layout.app')
 
-@include('include.tableheadscript')
+@section('headScript') 
+  @include('include.tableHeadScript')
+@endsection
 
-<body class="theme-red">
+@section('content')
 
-    @include('include.navbar')
-    @include('include.sidebar')
+<div class="container-fluid">
+    <div class="block-header">
+      <h2>
+      Showing Questions list
+      </h2>
+    </div>
+    <!-- Basic Examples -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>Questions</h2>
+            <ul class="header-dropdown m-r--5">
+              <li class="dropdown">
+                <a
+                  href="javascript:void(0);"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="material-icons">more_vert</i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="/register">Create New User</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered table-striped table-hover js-basic-example dataTable"
+              >
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Section</th>
+                    <th>createdAt</th>
+                    <th>updatedAt</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @each(question in questions)
+                  <tr>
+                    <td>{{ capitalize(question.question) }}</td>
+                    <td>{{ capitalize(question.section.section_name) }}</td>
+                    <td>{{ (question.created_at) }}</td>
+                    <td>{{ (question.updated_at) }}</td>
+                    <td>
+                      <a href="/question/delete/{{question.id}}" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                        <i class="material-icons">delete</i>
+                    </a>
+                    </td>
+                    <td>
+                      <a href="/question/edit/{{question.id}}" class="btn bg-blue btn-circle waves-effect waves-circle waves-float">
+                        <i class="material-icons">mode_edit</i>
+                      </a>
+                    </td>
+                  </tr>
+                  @endeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Basic Examples -->
+  </div>
 
-    <section class="content">
-        @!section('content')
-    </section>
+@endsection
 
-    @include('include.tablebodyscript')
-</body>
-
-</html>
+@section('bodyScript') 
+  @include('include.tableBodyScript')
+@endsection

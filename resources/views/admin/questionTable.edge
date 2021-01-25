@@ -12,6 +12,9 @@
       Showing Questions' List
       </h2>
     </div>
+    
+    @include('notification.alert')
+
     <!-- Basic Examples -->
     <div class="row clearfix">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -31,7 +34,7 @@
                   <i class="material-icons">more_vert</i>
                 </a>
                 <ul class="dropdown-menu pull-right">
-                  <li><a href="/register">Create New User</a></li>
+                  <li><a href="/question/create">Create New User</a></li>
                 </ul>
               </li>
             </ul>
@@ -59,12 +62,15 @@
                     <td>{{ (question.created_at) }}</td>
                     <td>{{ (question.updated_at) }}</td>
                     <td>
-                      <a href="/question/delete/{{question.id}}" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                        <i class="material-icons">delete</i>
-                    </a>
+                      <form action="/question/{{question.id}}/delete" method="POST">
+                        {{ csrfField() }}
+                        <button type="submit" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                          <i class="material-icons">delete</i>
+                        </button>
+                      </form>
                     </td>
                     <td>
-                      <a href="/question/edit/{{question.id}}" class="btn bg-blue btn-circle waves-effect waves-circle waves-float">
+                      <a href="/question/{{question.id}}/edit" class="btn bg-blue btn-circle waves-effect waves-circle waves-float">
                         <i class="material-icons">mode_edit</i>
                       </a>
                     </td>

@@ -2,12 +2,15 @@
 
 @section('content')
 
+@include('notification.alert')
+
 <body class="signup-page">
     <div class="signup-box">
         <div class="logo">
             <a href="javascript:void(0);">My<b>Audit</b></a>
             <small>Admin BootStrap Based - Material Design</small>
         </div>
+
         <div class="card">
             <div class="body">
                 <form method="POST" action="{{ route('signup') }}">

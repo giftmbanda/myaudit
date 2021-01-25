@@ -4,6 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const User = use("App/Models/User");
+
 /**
  * Resourceful controller for interacting with UserController
  */
@@ -43,7 +44,25 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {}
+  async store({ request, session, response }) {
+    const user = request.all();
+
+    await User.create({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+    });
+
+    session.flash({
+      notification: {
+        type: "success",
+        message: "User updated successfully!",
+      },
+    });
+
+    return response.redirect("/users");
+  }
 
   /**
    * Display a single UserController.
@@ -79,20 +98,37 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {
-    const userId = params.id;
-    const user = request.all();
+  async update({ params, request, session, response }) {
+    try {
+      const userId = params.id;
+      const user = await User.find(userId);
+      const input = request.all();
 
-    const updateUser = {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      is_active: user.is_active,
-      role: user.role,
-    };
+      user.name = input.name ? input.name : user.name;
+      user.email = input.email ? input.email : user.email;
+      user.password = input.password ? input.password : user.password;
+      user.is_active = input.is_active ? input.is_active : user.is_active;
+      user.role = input.role ? input.role : user.role;
 
-    await User.query().where("id", userId).update(updateUser);
-    return response.redirect("/users");
+      await user.save();
+      session.flash({
+        notification: {
+          type: "success",
+          message: "User updated successfully!",
+        },
+      });
+      
+      return response.redirect(`/user/${userId}/edit`);
+
+    } catch (error) {
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "An error occurred, failed to update user.",
+        },
+      });
+      return response.redirect("/users");
+    }
   }
 
   /**
@@ -103,10 +139,30 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {
+  async destroy({ params, auth, request, session, response }) {
     const userId = params.id;
-    await User.query().where("id", userId).update({ is_active: false });
-    return response.redirect("/users");
+    if (auth.user.id != userId) {
+      const user = await User.find(userId);
+      user.is_active = false;
+
+      await user.save();
+
+      session.flash({
+        notification: {
+          type: "success",
+          message: "User deleted successfully!",
+        },
+      });
+      return response.redirect("/users");
+    } else {
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "You can not delete yourself!",
+        },
+      });
+      return response.redirect("/users");
+    }
   }
 }
 

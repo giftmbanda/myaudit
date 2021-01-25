@@ -43,18 +43,31 @@ class signinController {
    * @param {Response} ctx.response
    */
   async store({ request, session, response }) {
-    //get all form inputs
-    const user = request.all();
 
-    //create user
-    await User.create({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      role: user.role,
-    });
+    try {
+      const input = request.all();
 
-    return response.redirect("/");
+      await User.create({
+        name: input.name,
+        email: input.email,
+        password: input.password,
+        role: input.role,
+      });
+       
+      return response.redirect("/");
+
+    } catch (error) {
+
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "Email already taken!",
+        },
+      });
+
+      return response.redirect("back");
+    }
+
   }
 
   /**

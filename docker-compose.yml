@@ -8,14 +8,16 @@ services:
   #     - "8081:8081" # port 8081 is already exposed in the Dockerfile
   #   depends_on: 
   #     - mysql
-  # client: # second service
-  #   container_name: client-container
-  #   restart: always
-  #   build: ./client
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on: 
-  #     - api
+  client: # second service
+    container_name: client-container
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - mysql
+    volumes:
+      - .:/code
   mysql: # third service
     container_name: mysql-container
     image: mysql:5.7

@@ -31,7 +31,9 @@ class AuditToolController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create({ request, response, view }) {}
+  async create({ request, response, view }) {
+    return view.render("admin.addTool");
+  }
 
   /**
    * Create/save a new audittool.
@@ -41,7 +43,31 @@ class AuditToolController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {}
+  async store({ request, session, response }) {
+    
+    try {
+      const input = request.all();
+      await Tool.create({ tool_name: input.name});
+       
+      session.flash({
+        notification: {
+          type: "success",
+          message: "Audit Tool created successfully!",
+        },
+      });
+      return response.redirect("/tools");
+
+    } catch (error) {
+
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "An error occurred!",
+        },
+      });
+      return response.redirect("back");
+    }
+  }
 
   /**
    * Display a single audittool.

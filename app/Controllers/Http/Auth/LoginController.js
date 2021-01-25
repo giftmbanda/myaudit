@@ -45,10 +45,7 @@ class LoginController {
   async store({ request, auth, session, response }) {
     const { email, password, remember } = request.all();
 
-    const user = await User.query()
-      .where("email", email)
-      .where("is_active", true)
-      .first();
+    const user = await User.query().where("email", email).where("is_active", true).first();
 
     if (user) {
       const passwordVerified = await Hash.verify(password, user.password);

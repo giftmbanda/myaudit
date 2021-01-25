@@ -31,12 +31,27 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get("/users", "Admin/UserController.index"); //render users
-    Route.get("/user/create", "Admin/UserController.create"); //render register
-    Route.get("/user/edit/:id", "Admin/UserController.edit"); //render user edit
-    Route.patch("/user/update/:id", "Admin/UserController.update").as('update') //process user update
-    Route.get("/user/delete/:id", "Admin/UserController.destroy"); //process user deletion
-    Route.post("/register", "Auth/SigninController.store").as("register"); //process register
+    Route.get("/user/create", "Admin/UserController.create"); //render user register
+    Route.get("/user/:id/edit", "Admin/UserController.edit"); //render user edit
+    Route.post("/user/:id/update", "Admin/UserController.update") //process user update
+    Route.post("/user/:id/delete", "Admin/UserController.destroy"); //process user deletion
+    Route.post("/user/store", "Admin/UserController.store"); //process register
+
     Route.get("/tools", "Admin/AuditToolController.index"); //render tools
-    Route.get("/sections", "Admin/SectionController.index"); //render sections
-    Route.get("/questions", "Admin/QuestionController.index"); //render questions
+    Route.get("/tool/create", "Admin/AuditToolController.create"); //render  add tool
+    Route.post("/tool/store", "Admin/AuditToolController.store"); //render tools
+    Route.post("/tool/:id/delete", "Admin/AuditToolController.destroy"); //process tool deletion
+
+    Route.get("/sections", "Admin/SectionController.index");
+    Route.get("/section/create", "Admin/SectionController.create");
+    Route.post("/section/store", "Admin/SectionController.store");
+    Route.post("/section/:id/delete", "Admin/SectionController.destroy");
+    Route.get("/section/:id/edit", "Admin/SectionController.edit");
+
+    Route.get("/questions", "Admin/QuestionController.index");
+    Route.get("/question/create", "Admin/QuestionController.create");
+    Route.post("/question/store", "Admin/QuestionController.store");
+    Route.post("/question/:id/delete", "Admin/QuestionController.destroy");
+    Route.get("/question/:id/edit", "Admin/QuestionController.edit");
+
 }).middleware(["auth", "admin"]); //can only access them if you're LOGGED IN AS AN ADMIN

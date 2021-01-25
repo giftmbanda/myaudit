@@ -12,6 +12,10 @@ hooks.after.providersBooted(() => {
     const APP_URL = Env.get("APP_URL");
     return path ? `${APP_URL}/${path}` : APP_URL;
   });
+  
+  View.global('currentTime', function () {
+    return new Date().toUTCString();
+  })
 
   Exception.handle("InvalidSessionException", (error, { response }) => {
     return response.redirect("/");

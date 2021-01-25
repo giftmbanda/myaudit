@@ -11,6 +11,9 @@
           Showing Audit Tools' List       
         </h2>
     </div>
+    
+    @include('notification.alert')
+
     <!-- Basic Examples -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -25,9 +28,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                <li><a href="/tool/create">Add Tool</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -60,20 +61,19 @@
                                   <td>{{ (tool.created_at) }}</td>
                                   <td>{{ (tool.updated_at) }}</td>
                                   <td>
-                                    <button
-                                      type="submit"
-                                      class="btn bg-red btn-circle waves-effect waves-circle waves-float"
-                                    >
-                                      <i class="material-icons">delete</i>
-                                    </button>
+
+                                    <form action="/tool/{{tool.id}}/delete" method="POST">
+                                      {{ csrfField() }}
+                                      <button type="submit" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                        <i class="material-icons">delete</i>
+                                      </button>
+                                    </form>
+
                                   </td>
                                   <td>
-                                    <button
-                                      type="submit"
-                                      class="btn bg-blue btn-circle waves-effect waves-circle waves-float"
-                                    >
+                                    <a href="/tool/{{tool.id}}/edit" class="btn bg-blue btn-circle waves-effect waves-circle waves-float">
                                       <i class="material-icons">mode_edit</i>
-                                    </button>
+                                    </a>
                                   </td>
                                 </tr>
                                 @endeach

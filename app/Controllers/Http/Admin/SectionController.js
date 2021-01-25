@@ -4,6 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const Section = use("App/Models/Section");
+const Tool = use("App/Models/Tool");
 /**
  * Resourceful controller for interacting with sections
  */
@@ -31,7 +32,10 @@ class SectionController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create({ request, response, view }) {}
+  async create({ request, response, view }) {
+    const tools = await Tool.all();
+    return view.render("admin.addSection", { tools: tools.toJSON() });
+  }
 
   /**
    * Create/save a new section.
@@ -41,7 +45,32 @@ class SectionController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {}
+  async store({ request, session, response }) {
+    try {
+      const input = request.all();
+
+      await Section.create({
+        section_name: input.section,
+        tool_id: input.tool,
+      });
+
+      session.flash({
+        notification: {
+          type: "success",
+          message: "Section created successfully!",
+        },
+      });
+      return response.redirect("/sections");
+    } catch (error) {
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "An error occurred!",
+        },
+      });
+      return response.redirect("back");
+    }
+  }
 
   /**
    * Display a single section.
@@ -83,7 +112,32 @@ class SectionController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, session, request, response }) {
+    try {
+      const sectionId = params.id;
+
+      const section = await Section.find(sectionId);
+      await section.delete();
+
+      session.flash({
+        notification: {
+          type: "success",
+          message: "Section deleted successfully!",
+        },
+      });
+
+      return response.redirect("/sections");
+      
+    } catch (error) {
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "Failed to delete section!",
+        },
+      });
+      return response.redirect("back");
+    }
+  }
 }
 
 module.exports = SectionController;

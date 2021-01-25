@@ -7,7 +7,7 @@ class AuditToolSchema extends Schema {
   up () {
     this.create('tools', (table) => {
       table.increments()
-      table.string("tool_name", 254).notNullable();
+      table.string("tool_name", 254).notNullable().unique();
       table.timestamps()
     })
   }

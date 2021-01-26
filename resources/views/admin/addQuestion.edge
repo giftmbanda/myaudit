@@ -53,7 +53,7 @@
             <div class="form-group">
               <div class="form-line">
                 <label for="section">Select Section</label>
-                <select class="form-control show-tick" name="section" required>
+                <select class="form-control show-tick" id="section" name="section" required>
                   @each(section in sections)
                     <option value="{{section.id}}">{{section.section_name}}</option>
                   @endeach

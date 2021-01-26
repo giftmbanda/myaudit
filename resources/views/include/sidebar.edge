@@ -29,80 +29,80 @@
       <ul class="list">
         <li class="header">MAIN NAVIGATION</li>
         @if(auth.user.role === 'admin')
-        <li class="{{ url === '/dashboard' ? 'active' : '' }}">
+        <li class="{{ url === '/dashboard' ? 'active' : null }}">
           <a href="/dashboard">
             <i class="material-icons">home</i>
             <span>Home</span>
           </a>
         </li>
-        <li class="{{ url === '/users' || url === '/user/create' ? 'active' : '' }}">
+        <li class="{{ url === '/users' || url === '/user/create' ? 'active' : null }}">
           <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">person_add</i>
             <span>Users</span>
           </a>
           <ul class="ml-menu">
-            <li class="{{ url === '/users' ? 'active' : '' }}">
+            <li class="{{ url === '/users' ? 'active' : null }}">
               <a href="/users">Manage Users</a>
             </li>
-            <li class="{{ url === '/user/create' ? 'active' : '' }}">
+            <li class="{{ url === '/user/create' ? 'active' : null }}">
               <a href="/user/create">Create User</a>
             </li>
           </ul>
         </li>
-        <li class="{{ url === '/tools'  || url === '/tool/create' ? 'active' : '' }}">
+        <li class="{{ url === '/tools'  || url === '/tool/create' ? 'active' : null }}">
           <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">folder</i>
             <span>Audit Tools</span>
           </a>
           <ul class="ml-menu">
-            <li class="{{ url === '/tools' ? 'active' : '' }}">
+            <li class="{{ url === '/tools' ? 'active' : null }}">
               <a href="/tools">Manage Tools</a>
             </li>
-            <li class="{{ url === '/tool/create' ? 'active' : '' }}">
+            <li class="{{ url === '/tool/create' ? 'active' : null }}">
               <a href="/tool/create">Create Tool</a>
             </li>
           </ul>
         </li>
-        <li class="{{ url === '/sections' || url === '/section/create' ? 'active' : '' }}">
+        <li class="{{ url === '/sections' || url === '/section/create' ? 'active' : null }}">
           <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">description</i>
             <span>Sections</span>
           </a>
           <ul class="ml-menu">
-            <li class="{{ url === '/sections' ? 'active' : '' }}">
+            <li class="{{ url === '/sections' ? 'active' : null }}">
               <a href="/sections">Manage Sections</a>
             </li>
-            <li class="{{ url === '/section/create' ? 'active' : '' }}">
+            <li class="{{ url === '/section/create' ? 'active' : null }}">
               <a href="/section/create">Create Section</a>
             </li>
           </ul>
         </li>
-        <li class="{{ url === '/questions' || url === '/question/create' ? 'active' : '' }}">
+        <li class="{{ url === '/questions' || url === '/question/create' ? 'active' : null }}">
           <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">view_list</i>
             <span>Questions</span>
           </a>
           <ul class="ml-menu">
-            <li class="{{ url === '/questions' ? 'active' : '' }}">
+            <li class="{{ url === '/questions' ? 'active' : null }}">
               <a href="/questions">Manage Questions</a>
             </li>
-            <li class="{{ url === '/question/create' ? 'active' : '' }}">
+            <li class="{{ url === '/question/create' ? 'active' : null }}">
               <a href="/question/create">Create Question</a>
             </li>
           </ul>
         </li>
         @else
-        <li class="{{ url === '/overview' ? 'active' : '' }}">
+        <li class="{{ url === '/audit/view' || url === '/audit/tools'? 'active' : null }}">
           <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">assignment</i>
             <span>Audit</span>
           </a>
           <ul class="ml-menu">
-            <li class="{{ url === '/overview' ? 'active' : '' }}">
+            <li class="{{ url === '/audit/view' ? 'active' : null }}">
               <a href="/overview">View Audit Results</a>
             </li>
-            <li class="{{ url === '/overview/create' ? 'active' : '' }}">
-              <a href="/overview/create">Start Auditing</a>
+            <li class="{{ url === '/audit/tools' ? 'active' : null }}">
+              <a href="/audit/tools">Start Auditing</a>
             </li>
           </ul>
         </li>

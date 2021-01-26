@@ -5,13 +5,13 @@ FROM node:8
 # RUN mkdir -p /usr/src/app
 
 # assign the created folder as a working dir
-WORKDIR . /app
+WORKDIR /. /app
 
 # copying the ‘package.json’ file to working dir
 COPY package.json ./
 
 # run the ‘npm cache clean’ command
-# RUN npm cache verify
+RUN npm cache verify
 
 # run the ‘npm install’ command
 RUN npm install

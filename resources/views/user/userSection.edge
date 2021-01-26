@@ -1,0 +1,40 @@
+@layout('layout.app')
+
+@section('content')
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>SHOWING SECTIONS</h2>
+    </div>
+    <!-- Basic Card -->
+    <div class="row clearfix">
+        @each(section in sections)
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            {{section.id}} : {{section.section_name}}
+                            <small>Click on "View Question" button to view all questions under this section</small>
+                        </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="button-demo">
+                            <a href="/audit/question/{{section.id}} " type="button" class="btn btn-primary waves-effect">View Question</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endeach
+    </div>
+    <!-- #END# Basic Card -->
+</div>
+@endsection

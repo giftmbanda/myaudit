@@ -27,6 +27,11 @@ Route.group(() => {
 Route.group(() => {
     Route.get("/logout", "Auth/LoginController.destroy"); //process logout
     Route.get("/dashboard", "DashboardController.index"); //render dashboard
+    Route.get("/overview", "User/UserController.index"); //render users
+    Route.get("/audit/tools", "User/AuditController.index");
+    Route.get("/audit/section/:id", "User/AuditController.getSectionByToolId");
+    Route.get("/audit/question/:id", "User/AuditController.getQuestionBySectionId");
+
 }).middleware(["auth"]); //can only access them if you're LOGGED IN
 
 Route.group(() => {

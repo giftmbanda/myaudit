@@ -99,36 +99,37 @@ class UserController {
    * @param {Response} ctx.response
    */
   async update({ params, request, session, response }) {
-    try {
-      const userId = params.id;
-      const user = await User.find(userId);
+    //  try {
+    //   const userId = params.id;
+    //   const user = await User.find(userId);
       const input = request.all();
+      console.log(input.is_active);
 
-      user.name = input.name ? input.name : user.name;
-      user.email = input.email ? input.email : user.email;
-      user.password = input.password ? input.password : user.password;
-      user.is_active = input.is_active ? input.is_active : user.is_active;
-      user.role = input.role ? input.role : user.role;
+    //   user.name = input.name ? input.name : user.name;
+    //   user.email = input.email ? input.email : user.email;
+    //   user.password = input.password ? input.password : user.password;
+    //   //user.is_active = input.is_active ? input.is_active : user.is_active;
+    //   user.role = input.role ? input.role : user.role;
 
-      await user.save();
-      session.flash({
-        notification: {
-          type: "success",
-          message: "User updated successfully!",
-        },
-      });
+    //   await user.save();
+    //   session.flash({
+    //     notification: {
+    //       type: "success",
+    //       message: "User updated successfully!",
+    //     },
+    //   });
       
-      return response.redirect(`/user/${userId}/edit`);
+    //   return response.redirect(`/user/${userId}/edit`);
 
-    } catch (error) {
-      session.flash({
-        notification: {
-          type: "danger",
-          message: "An error occurred, failed to update user.",
-        },
-      });
-      return response.redirect("/users");
-    }
+    // } catch (error) {
+    //   session.flash({
+    //     notification: {
+    //       type: "danger",
+    //       message: "An error occurred, failed to update user.",
+    //     },
+    //   });
+    //   return response.redirect("/users");
+    // }
   }
 
   /**

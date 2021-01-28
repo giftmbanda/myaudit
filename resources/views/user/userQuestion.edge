@@ -3,16 +3,16 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>SHOWING <b>{{capitalize(sections[0].tool.tool_name)}}</b> SECTIONS</h2>
+        <h2>SHOWING <b>{{capitalize(questions[0].section.section_name)}}</b> QUESTIONS</h2>
     </div>
     <!-- Basic Card -->
     <div class="row clearfix">
-        @each(section in sections)
+        @each(question in questions, i)
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
                         <h2>
-                            {{ ($loop.index + 1) }}: {{capitalize(section.section_name)}}
+                            {{ ($loop.index + 1) }} : {{capitalize(question.question)}}
                             <small>Click on "View Question" button to view all questions under this section</small>
                         </h2>
                         <ul class="header-dropdown m-r--5">
@@ -27,10 +27,19 @@
                         </ul>
                     </div>
                     <div class="body">
-                        <div class="button-demo">
-                            <a href="/audit/question/{{section.id}} " type="button" class="btn btn-primary waves-effect">View Question</a>
-                        </div>
+                     
+                            <div class="form-line">
+                              <input type="radio" id="role_1_{{question.id}}" name="answer" value="true">
+                              <label for="role_1_{{question.id}}">True</label>
+
+                              <input type="radio" id="role_2_{{question.id}}" name="answer" value="false">
+                              <label for="role_2_{{question.id}}" class="m-l-20">False</label>
+
+                              <input type="radio" id="role_3_{{question.id}}" name="answer" value="n/a">
+                              <label for="role_3_{{question.id}}" class="m-l-20">N/A</label>
+                            </div>
                     </div>
+                   
                 </div>
             </div>
         @endeach

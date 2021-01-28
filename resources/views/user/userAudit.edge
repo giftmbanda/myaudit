@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            {{tool.id}} : {{tool.tool_name}}
+                            {{ ($loop.index + 1) }} : {{capitalize(tool.tool_name)}}
                             <small>Click on "View Sections" button to view all section under this Audit Tool</small>
                         </h2>
                         <ul class="header-dropdown m-r--5">

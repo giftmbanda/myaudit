@@ -11,16 +11,16 @@ class AuditController {
 
   async getSectionByToolId({ params, request, response, view }) {
     const toolId = params.id;
-    const sections = await Section.query().where("tool_id", toolId).fetch();
-    console.log( { sections: sections.toJSON() })
+    const sections = await Section.query().where("tool_id", toolId).with("tool").fetch();
+    //console.log( sections.toJSON() )
     return view.render("user.userSection", { sections: sections.toJSON() });
   }
 
   async getQuestionBySectionId({ params, request, response, view }) {
     const sectionId = params.id;
-    const questions = await Question.query().where("section_id", sectionId).fetch();
-    console.log( { questions: questions.toJSON() })
-    //return view.render("user.userSection", { questions: questions.toJSON() });
+    const questions = await Question.query().where("section_id", sectionId).with("section").fetch();
+    console.log( questions.toJSON() )
+    return view.render("user.userQuestion", { questions: questions.toJSON() });
   }
 }
 

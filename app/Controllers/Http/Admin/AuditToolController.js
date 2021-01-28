@@ -109,7 +109,32 @@ class AuditToolController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, session, request, response }) {
+    try {
+      const toolId = params.id;
+
+      const tool = await Tool.find(toolId);
+      await tool.delete();
+
+      session.flash({
+        notification: {
+          type: "success",
+          message: "Audit Tool deleted successfully!",
+        },
+      });
+
+      return response.redirect("/tools");
+      
+    } catch (error) {
+      session.flash({
+        notification: {
+          type: "danger",
+          message: "Failed to delete Audit Tool !",
+        },
+      });
+      return response.redirect("back");
+    }
+  }
 }
 
 module.exports = AuditToolController;

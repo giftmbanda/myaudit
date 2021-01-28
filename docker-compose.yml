@@ -1,15 +1,5 @@
 version: "3.7"
 services:
-  client: # second service
-    container_name: client-container
-    restart: always
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on: 
-      - mysql
-    volumes:
-      - .:/code
   mysql: # third service
     container_name: mysql-container
     image: mysql:5.7

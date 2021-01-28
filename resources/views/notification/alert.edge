@@ -9,13 +9,13 @@
      {{ style('css/style.css') }} 
 @endsection
 
-@if(flashMessage('notification'))
+@if(old('notification'))
 
-<div class="alert alert-{{ flashMessage('notification.type') }} alert-dismissible" role="alert">
+<div class="alert alert-{{ old('notification.type') }} alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    {{ flashMessage('notification.message') }}
+    {{ old('notification.message') }}
 </div>
 
 @endif

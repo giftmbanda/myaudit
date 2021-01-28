@@ -22,15 +22,12 @@ class ToolSeeder {
     const sectionArrays = [];
 
     for (const i in _tools) {
-      let tool = _tools[i];
       sectionArrays.push({
-        tool_id: tool.id,
-        section_name: `Section ${tool.id}`
+        tool_id: _tools[i].id,
+        section_name: `Section ${_tools[i].id}`
       });
     }
-    // console.log(_tools.map(tool => tool.id));
     await Factory.model("App/Models/Section").createMany(sectionArrays.length, sectionArrays);
-    //console.log(toolsArray);
   }
 }
 
